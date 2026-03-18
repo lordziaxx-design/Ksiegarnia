@@ -1,0 +1,76 @@
+﻿<Window x:Class="Ksiegarnia.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Ksiegarnia.ViewModels"
+        xmlns:views="clr-namespace:Ksiegarnia.Views"
+        Title="Księgarnia" Height="600" Width="900">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:KsiazkiViewModel}">
+            <views:KsiazkiView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:KlienciViewModel}">
+            <views:KlienciView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:WypozyczeniaViewModel}">
+            <views:WypozyczeniaView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TOP BAR -->
+        <Grid Grid.Row="0" Background="#2C3E50" Height="60">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="📚 Księgarnia"
+                       Foreground="White" FontSize="20"
+                       VerticalAlignment="Center" Margin="20,0"/>
+            <TextBlock Grid.Column="1" Text="👤 Użytkownik"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Grid>
+
+        <!-- MAIN AREA -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- SIDEBAR -->
+            <Border Background="#34495E">
+                <StackPanel Margin="5">
+                    <Button Content="📚 Książki"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="ksiazki"
+                            Margin="5" Height="40"/>
+                    <Button Content="👥 Klienci"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="klienci"
+                            Margin="5" Height="40"/>
+                    <Button Content="🧾 Wypożyczenia"
+                            Command="{Binding NavigateCommand}"
+                            CommandParameter="wypozyczenia"
+                            Margin="5" Height="40"/>
+                </StackPanel>
+            </Border>
+
+            <!-- CONTENT -->
+            <ContentControl Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Ksiegarnia.Views.WypozyczeniaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Lista Wypożyczeń" FontSize="22" Margin="0,0,0,10"/>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Rentals}"
+          AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"          Binding="{Binding IDwyp}"       Width="50"/>
+                <DataGridTextColumn Header="Książka"     Binding="{Binding Ksiazka}"     Width="*"/>
+                <DataGridTextColumn Header="Czytelnik"   Binding="{Binding Czytelnik}"   Width="*"/>
+                <DataGridTextColumn Header="Od"          Binding="{Binding DataOD}"      Width="*"/>
+                <DataGridTextColumn Header="Do"          Binding="{Binding DataDO}"      Width="*"/>
+                <DataGridTextColumn Header="Oddano"      Binding="{Binding DataOddania}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
