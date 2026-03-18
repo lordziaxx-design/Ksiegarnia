@@ -20,7 +20,6 @@ namespace Ksiegarnia.ViewModels
 			using var db = new AppDbContext();
 			foreach (var client in db.Czytelnicy)
 				Clients.Add(client);
-			//asda
 		}
 	}
 }
