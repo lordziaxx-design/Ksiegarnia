@@ -5,6 +5,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Lista Książek" FontSize="22" Margin="0,0,0,10"/>
@@ -16,7 +17,32 @@
                 <DataGridTextColumn Header="Tytuł" Binding="{Binding Nazwa}"      Width="*"/>
                 <DataGridTextColumn Header="Autor" Binding="{Binding Autor}"      Width="*"/>
                 <DataGridTextColumn Header="Cena"  Binding="{Binding Cena}"       Width="100"/>
+                <DataGridTemplateColumn Header="Akcje" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                <Button Content="Edytuj"
+                Command="{Binding DataContext.EditClientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                CommandParameter="{Binding}"
+                Margin="2"/>
+
+                                <Button Content="Usuń"
+                Command="{Binding DataContext.DeleteClientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                CommandParameter="{Binding}"
+                Margin="2"/>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Border Background="#34495E" Grid.Row="2" Height="50" Width="210">
+            <Button Content="DODAJ"
+Command=""
+CommandParameter="ksiazki"
+Margin="5" Height="40" Width="200" HorizontalAlignment="Center" Background="LightGreen"/>
+        </Border>
     </Grid>
 </UserControl>
