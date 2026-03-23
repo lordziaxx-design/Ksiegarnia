@@ -1,6 +1,5 @@
 ﻿using Ksiegarnia.Models;
 using Microsoft.EntityFrameworkCore;
-using Ksiegarnia;
 
 namespace Ksiegarnia
 {

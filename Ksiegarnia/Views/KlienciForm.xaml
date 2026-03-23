@@ -1,0 +1,52 @@
+<Window x:Class="Ksiegarnia.Views.KlienciForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Klient" Height="350" Width="300">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#2C3E50" Height="60">
+            <TextBlock Text="Klient"
+                       Foreground="White" FontSize="20"
+                       VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Height="30" Margin="5">
+            <TextBlock Text="Imię" FontSize="20" Margin="10,0"/>
+            <TextBox Width="150" Height="30" HorizontalAlignment="Right" Name="imie"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Height="30" Margin="5">
+            <TextBlock Text="Nazwisko" FontSize="20" Margin="10,0"/>
+            <TextBox Width="150" Height="30" HorizontalAlignment="Right" Name="nazwisko"/>
+        </Grid>
+
+        <Grid Grid.Row="3" Height="30" Margin="5">
+            <TextBlock Text="E-mail" FontSize="20" Margin="10,0"/>
+            <TextBox Width="150" Height="30" HorizontalAlignment="Right" Name="email"/>
+        </Grid>
+
+        <Grid Grid.Row="4" Height="30" Margin="5">
+            <TextBlock Text="Nr. telefonu" FontSize="20" Margin="10,0"/>
+            <TextBox Width="150" Height="30" HorizontalAlignment="Right" Name="telefon"/>
+        </Grid>
+
+        <Grid Grid.Row="5" Height="40" Margin="5">
+            <Border Background="#34495E" Height="35" Width="204">
+                <Button Content="ZATWIERDŹ"
+                        Click="btnSave_Click"
+                        Margin="2" Height="33" Width="200"
+                        HorizontalAlignment="Center" Background="LightGreen"/>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

@@ -22,7 +22,7 @@ namespace Ksiegarnia.ViewModels
 		public MainViewModel()
 		{
 			NavigateCommand = new RelayCommand(Navigate);
-			CurrentView = KsiazkiVM; // default view on startup
+			CurrentView = KsiazkiVM; 
 		}
 
 		private void Navigate(object parameter)
