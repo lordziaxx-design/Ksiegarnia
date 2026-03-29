@@ -11,7 +11,7 @@
         <TextBlock Text="Lista Klientów" FontSize="22" Margin="0,0,0,10"/>
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding Clients}"
-          AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged">
+          AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID"             Binding="{Binding ID}"       Width="50"/>
                 <DataGridTextColumn Header="Imię"           Binding="{Binding Imie}"     Width="*"/>
@@ -23,16 +23,11 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <Button Content="Edytuj"
-                                Command="{Binding DataContext.EditClientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                CommandParameter="{Binding}"
+                                <Button Content="Edytuj" Tag="{Binding}" Click="btnEdit_Click"
                                 Margin="2"/>
 
-                                <Button Content="Usuń"
-                                Command="{Binding DataContext.DeleteClientCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                CommandParameter="{Binding}"
+                                <Button Content="Usuń" Tag="{Binding}" Click="btnDelete_Click"
                                 Margin="2"/>
-
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -42,8 +37,7 @@
 
         <Border Background="#34495E" Grid.Row="2" Height="50" Width="210">
             <Button Content="DODAJ"
-Command=""
-CommandParameter="ksiazki"
+Click="btnAdd_Click"
 Margin="5" Height="40" Width="200" HorizontalAlignment="Center" Background="LightGreen"/>
         </Border>
     </Grid>

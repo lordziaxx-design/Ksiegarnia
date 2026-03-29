@@ -10,7 +10,7 @@ namespace Ksiegarnia.Models
 		public string Tytul { get; set; }
 		public string Autor { get; set; }
 
-		public decimal Cena { get; set; }
+		public decimal? Cena { get; set; }
 
 		public int Stan { get; set; }
 		public int Wypozyczone { get; set; }

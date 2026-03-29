@@ -1,10 +1,11 @@
 ﻿using Ksiegarnia.Models;
+using Ksiegarnia.ViewModels;
+using Ksiegarnia.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using Ksiegarnia.Views;
 namespace Ksiegarnia.Views
 {
     /// <summary>
@@ -44,6 +45,8 @@ namespace Ksiegarnia.Views
 				};
 				db.Magazyn.Add(magazyn);
 				db.SaveChanges();
+				var vm = (KsiazkiViewModel)DataContext;
+				vm.LoadData();
 			}
 		}
 
@@ -66,6 +69,8 @@ namespace Ksiegarnia.Views
 				magazyn.Dostepne = record.Stan;
 
 				db.SaveChanges(); // ← jeden SaveChanges na końcu wystarczy
+				var vm = (KsiazkiViewModel)DataContext;
+				vm.LoadData();
 			}
 		}
 
@@ -78,14 +83,17 @@ namespace Ksiegarnia.Views
 			{
 				using var db = new AppDbContext();
 
-				// Magazyn pierwszy bo ma foreign key do Ksiazka
-				var magazyn = db.Magazyn.First(m => m.ID_ksiazki == record.Id);
-				db.Magazyn.Remove(magazyn);
-
+				var magazyn = db.Magazyn.FirstOrDefault(m => m.ID_ksiazki == record.Id);
+				if (magazyn != null)
+					db.Magazyn.Remove(magazyn);
+				db.SaveChanges();
 				var ksiazka = db.Ksiazki.Find(record.Id);
-				db.Ksiazki.Remove(ksiazka);
+				if (ksiazka != null)
+					db.Ksiazki.Remove(ksiazka);
 
 				db.SaveChanges();
+				var vm = (KsiazkiViewModel)DataContext;
+				vm.LoadData();
 			}
 		}
 	}

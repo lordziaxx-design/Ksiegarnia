@@ -15,8 +15,9 @@ namespace Ksiegarnia.ViewModels
 			LoadData();
 		}
 
-		private void LoadData()
+		public void LoadData()
 		{
+			Clients.Clear();
 			using var db = new AppDbContext();
 			foreach (var client in db.Czytelnicy)
 				Clients.Add(client);

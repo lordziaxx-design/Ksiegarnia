@@ -6,9 +6,9 @@ namespace Ksiegarnia
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class WypozyczenieForm : Window
 	{
-		public MainWindow()
+		public WypozyczenieForm()
 		{
 			InitializeComponent();
 			string connectionString = "Server=localhost\\SQLEXPRESS;Database=Ksiegarnia;Trusted_Connection=True;TrustServerCertificate=True;";

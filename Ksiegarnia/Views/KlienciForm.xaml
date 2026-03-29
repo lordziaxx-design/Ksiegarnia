@@ -42,9 +42,8 @@
         <Grid Grid.Row="5" Height="40" Margin="5">
             <Border Background="#34495E" Height="35" Width="204">
                 <Button Content="ZATWIERDŹ"
-                        Click="btnSave_Click"
-                        Margin="2" Height="33" Width="200"
-                        HorizontalAlignment="Center" Background="LightGreen"/>
+        Tag="{Binding}" Click="btnSave_Click"
+Margin="2" Height="33" Width="200" HorizontalAlignment="Center" Background="LightGreen"/>
             </Border>
         </Grid>
 

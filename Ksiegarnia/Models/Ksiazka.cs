@@ -10,6 +10,6 @@ namespace Ksiegarnia.Models
 		public int ID_ksiazki { get; set; }
 		public string Nazwa { get; set; }
 		public string Autor { get; set; }
-		public decimal Cena { get; set; }
+		public decimal? Cena { get; set; }
 	}
 }

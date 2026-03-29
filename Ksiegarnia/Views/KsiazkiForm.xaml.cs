@@ -26,6 +26,10 @@ namespace Ksiegarnia
 				cena.Text = _record.Cena.ToString();
 				mag.Text = _record.Stan.ToString();
 			}
+			else
+			{
+				_record = new Ksiazkifull(); 
+			}
 
 		}
 
@@ -36,12 +40,17 @@ namespace Ksiegarnia
 			{
 				MessageBox.Show("Name is required."); return;
 			}
+			if (string.IsNullOrWhiteSpace(autor.Text))
+			{
+				MessageBox.Show("Name is required."); return;
+			}
 			if (!decimal.TryParse(cena.Text, out decimal price))
 			{
 				MessageBox.Show("Enter a valid price."); return;
 			}
 
 			_record.Tytul = nazwa.Text.Trim();
+			_record.Autor = autor.Text.Trim();
 			_record.Cena = price;
 			_record.Stan = int.Parse(mag.Text);
 

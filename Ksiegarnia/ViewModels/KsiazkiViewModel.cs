@@ -19,8 +19,9 @@ namespace Ksiegarnia.ViewModels
 			CombineData();
 		}
 
-		private void LoadData()
+		public void LoadData()
 		{
+
 			using var db = new AppDbContext();
 			foreach (var book in db.Ksiazki)
 				Books.Add(book);
@@ -37,7 +38,7 @@ namespace Ksiegarnia.ViewModels
 							Id = b.ID_ksiazki,
 							Tytul = b.Nazwa,
 							Autor = b.Autor,
-							Cena = b.Cena,
+							Cena = b.Cena ?? 0m,
 							Stan = m.Dostepne,
 							Wypozyczone = m.Wypozyczone
 						};
