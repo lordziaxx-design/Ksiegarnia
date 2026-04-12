@@ -16,5 +16,8 @@ namespace Ksiegarnia.Models
 
 		[Column("nr.tel")]
 		public string Telefon { get; set; }
+
+		[NotMapped] 
+		public string ImieNazwisko => $"{ID}.{Imie.Trim()} {Nazwisko.Trim()}";
 	}
 }

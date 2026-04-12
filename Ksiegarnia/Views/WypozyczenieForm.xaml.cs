@@ -1,6 +1,8 @@
-﻿using System.Text;
-using System.Windows;
+﻿using Ksiegarnia.Models;
 using Microsoft.Data.SqlClient;
+using System.Text;
+using System.Windows;
+using System.Windows.Interop;
 namespace Ksiegarnia
 {
 	/// <summary>
@@ -8,23 +10,85 @@ namespace Ksiegarnia
 	/// </summary>
 	public partial class WypozyczenieForm : Window
 	{
-		public WypozyczenieForm()
+		private Wypozyczenie _record;
+
+		public bool Saved { get; private set; } = false;
+		public WypozyczenieForm(Wypozyczenie record = null)
 		{
 			InitializeComponent();
-			string connectionString = "Server=localhost\\SQLEXPRESS;Database=Ksiegarnia;Trusted_Connection=True;TrustServerCertificate=True;";
-
-			using (SqlConnection conn = new SqlConnection(connectionString))
+			_record = record;
+			LoadComboBoxes();
+			if (_record != null) // EDIT mode — pre-fill the form
 			{
-				try
+
+				ksiazka.SelectedValue = record.IDks;
+				czyt.SelectedValue = record.IDczyt;
+				dataod.SelectedDate = record.DataOD;
+				datawyp.SelectedDate = record.DataDO;
+
+				if (record.DataOddania == null)
 				{
-					conn.Open();
-					MessageBox.Show("Connected!");
+					odd.IsChecked = false;
 				}
-				catch (Exception ex)
+				else
 				{
-					MessageBox.Show(ex.Message);
+					odd.IsChecked = true;
 				}
 			}
+			else
+			{
+				_record = new Wypozyczenie();
+			}
+
 		}
+		private void btnSave_Click(object sender, RoutedEventArgs e)
+		{
+			// Basic validation
+			if (ksiazka.SelectedItem == null)
+			{
+				MessageBox.Show("Ksiazka is required."); return;
+			}
+			if (czyt.SelectedItem == null)
+			{
+				MessageBox.Show("Name is required."); return;
+			}
+
+
+			_record.IDczyt = (int)czyt.SelectedValue;
+			_record.IDks = (int)ksiazka.SelectedValue;
+			_record.DataOD = dataod.SelectedDate.Value;
+			_record.DataDO = datawyp.SelectedDate.Value;
+			if(odd.IsChecked == true)
+			{
+				_record.DataOddania = DateTime.Now;
+			}
+			else
+			{
+				_record.DataOddania = null;
+			}
+		
+
+			Saved = true;
+			DialogResult = true; // closes the dialog
+		}
+
+		private void btnCancel_Click(object sender, RoutedEventArgs e)
+		{
+			DialogResult = false;
+		}
+		private void LoadComboBoxes()
+		{
+			using var db = new AppDbContext();
+			datawyp.SelectedDate = DateTime.Today;
+			dataod.SelectedDate = DateTime.Today;
+			czyt.ItemsSource = db.Czytelnicy.ToList();
+			czyt.DisplayMemberPath = "ImieNazwisko";
+			czyt.SelectedValuePath = "ID";
+
+			ksiazka.ItemsSource = db.Ksiazki.ToList(); // adjust DbSet name
+			ksiazka.DisplayMemberPath = "Nazwa";       // adjust property name
+			ksiazka.SelectedValuePath = "ID_ksiazki";
+		}
+		public Wypozyczenie GetRecord() => _record;
 	}
 }

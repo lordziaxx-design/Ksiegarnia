@@ -26,10 +26,10 @@ namespace Ksiegarnia.ViewModels
 			LoadData();
 		}
 
-		private void LoadData()
+		public void LoadData()
 		{
 			using var db = new AppDbContext();
-
+			Rentals.Clear();
 			var query = from w in db.Wypozyczenia
 						join k in db.Ksiazki on w.IDks equals k.ID_ksiazki
 						join c in db.Czytelnicy on w.IDczyt equals c.ID
