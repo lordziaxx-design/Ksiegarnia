@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Ksiegarnia"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>
