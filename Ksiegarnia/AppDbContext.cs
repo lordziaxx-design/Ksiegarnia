@@ -2,6 +2,9 @@
 using Ksiegarnia.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
 
 namespace Ksiegarnia
 {
@@ -17,29 +20,11 @@ namespace Ksiegarnia
 		{
 			if (!optionsBuilder.IsConfigured)
 			{
-				var baseConn = Environment.GetEnvironmentVariable("DB_CONN") ??
-							   Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
+				IConfigurationRoot configuration = new ConfigurationBuilder()
+					.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("settings.json").Build();
 
-				if (string.IsNullOrWhiteSpace(baseConn))
-				{
-					baseConn = "Server=localhost\\SQLEXPRESS;Database=Ksiegarnia;Trusted_Connection=True;TrustServerCertificate=True;";
-				}
-
-				var builder = new SqlConnectionStringBuilder(baseConn)
-				{
-					Encrypt = true,
-					PersistSecurityInfo = false,
-					ConnectTimeout = 30
-				};
-
-				// jeśli używamy LocalDB lub Integrated Security, wyłącz szyfrowanie (LocalDB nie wspiera)
-				if (!string.IsNullOrWhiteSpace(builder.DataSource) &&
-					(builder.DataSource.StartsWith("(localdb)", StringComparison.OrdinalIgnoreCase) || builder.IntegratedSecurity))
-				{
-					builder.Encrypt = false;
-				}
-
-				optionsBuilder.UseSqlServer(builder.ConnectionString);
+				var connectionString = configuration.GetConnectionString("DefaultConnection");
+				optionsBuilder.UseSqlServer(connectionString);
 			}
 		}
 
