@@ -37,7 +37,6 @@ namespace Ksiegarnia
 		}
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
-			// Basic validation
 			if (ksiazka.SelectedItem == null)
 			{
 				MessageBox.Show("Ksiazka is required."); return;
@@ -52,7 +51,20 @@ namespace Ksiegarnia
 			_record.IDks = (int)ksiazka.SelectedValue;
 			_record.DataOD = dataod.SelectedDate.Value;
 			_record.DataDO = datawyp.SelectedDate.Value;
-			if(odd.IsChecked == true)
+
+			int selectedBookId = (int)ksiazka.SelectedValue;
+			if (_record.IDks != selectedBookId || _record.IDwyp == 0)
+			{
+				using var db = new AppDbContext();
+				var magazyn = db.Magazyn.Find(selectedBookId);
+				if (magazyn == null || magazyn.Dostepne <= 0)
+				{
+					MessageBox.Show("Brak dostępnych egzemplarzy tej książki.");
+					return;
+				}
+			}
+
+			if (odd.IsChecked == true)
 			{
 				_record.DataOddania = DateTime.Now;
 			}

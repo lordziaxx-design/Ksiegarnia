@@ -28,7 +28,6 @@ namespace Ksiegarnia.Views
 
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
-			// Basic validation
 			if (string.IsNullOrWhiteSpace(imie.Text) || !imie.Text.All(char.IsLetter))
 			{
 				MessageBox.Show("Name is required."); return;

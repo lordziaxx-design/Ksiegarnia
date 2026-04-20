@@ -34,6 +34,9 @@ namespace Ksiegarnia.ViewModels
 				"wypozyczenia" => WypozyczeniaVM,
 				_ => CurrentView
 			};
+
+			if (CurrentView == KsiazkiVM)
+				KsiazkiVM.LoadData();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

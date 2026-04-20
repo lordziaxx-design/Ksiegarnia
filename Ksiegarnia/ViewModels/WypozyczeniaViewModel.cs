@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 
 namespace Ksiegarnia.ViewModels
 {
-	// A helper class just for display — combines data from 3 tables
 	public class WypozyczenieDisplay
 	{
 		public int IDwyp { get; set; }

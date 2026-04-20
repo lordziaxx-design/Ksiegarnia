@@ -9,9 +9,15 @@ namespace Ksiegarnia.Views
         public KsiazkiView()
         {
             InitializeComponent();
-        }
-
-		// ADD
+			this.IsVisibleChanged += (s, e) =>
+			{
+				if ((bool)e.NewValue == true)
+				{
+					var vm = (KsiazkiViewModel)DataContext;
+					vm.LoadData();
+				}
+			};
+		}
 		private void btnAdd_Click(object sender, RoutedEventArgs e)
 		{
 			

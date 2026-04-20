@@ -29,12 +29,12 @@ namespace Ksiegarnia
 
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
-			// Basic validation
-			if (string.IsNullOrWhiteSpace(nazwa.Text) || !nazwa.Text.All(char.IsLetter)	)
+
+			if (string.IsNullOrWhiteSpace(nazwa.Text)	)
 			{
 				MessageBox.Show("Name is required."); return;
 			}
-			if (string.IsNullOrWhiteSpace(autor.Text) || !autor.Text.All(char.IsLetter))
+			if (string.IsNullOrWhiteSpace(autor.Text))
 			{
 				MessageBox.Show("Author is required."); return;
 			}

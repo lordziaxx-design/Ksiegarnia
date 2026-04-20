@@ -46,22 +46,23 @@ namespace Ksiegarnia.Views
 		private void btnEdit_Click(object sender, RoutedEventArgs e)
 		{
 			var rek = (WypozyczenieDisplay)((Button)sender).Tag;
-			using var db = new AppDbContext();
-			Wypozyczenie rekord = db.Wypozyczenia.Find(rek.IDwyp);
+
+			Wypozyczenie rekord;
+			using (var db = new AppDbContext())
+				rekord = db.Wypozyczenia.Find(rek.IDwyp);
+
 			var form = new WypozyczenieForm(rekord) { Owner = Window.GetWindow(this) };
 			if (form.ShowDialog() == true)
 			{
 				var record = form.GetRecord();
+				using var db = new AppDbContext();
 
 				var wyp = db.Wypozyczenia.Find(record.IDwyp);
-				wyp.IDks = record.IDks;
-				wyp.IDczyt = record.IDczyt;
-				wyp.DataOD = record.DataOD;
-				wyp.DataDO = record.DataDO;
 				var ksi = db.Magazyn.Find(wyp.IDks);
+
 				if (wyp.DataOddania != record.DataOddania)
 				{
-					if(wyp.DataOddania == null)
+					if (wyp.DataOddania == null)
 					{
 						ksi.Dostepne++;
 						ksi.Wypozyczone--;
@@ -71,12 +72,15 @@ namespace Ksiegarnia.Views
 						ksi.Dostepne--;
 						ksi.Wypozyczone++;
 					}
-					
 				}
-				wyp.DataOddania = record.DataOddania;
-				
 
-				db.SaveChanges(); 
+				wyp.IDks = record.IDks;
+				wyp.IDczyt = record.IDczyt;
+				wyp.DataOD = record.DataOD;
+				wyp.DataDO = record.DataDO;
+				wyp.DataOddania = record.DataOddania;
+
+				db.SaveChanges();
 				var vm = (WypozyczeniaViewModel)DataContext;
 				vm.LoadData();
 			}
@@ -91,11 +95,11 @@ namespace Ksiegarnia.Views
 				using var db = new AppDbContext();
 
 				var wyp = db.Wypozyczenia.FirstOrDefault(m => m.IDwyp == record.IDwyp);
-
-				var ksi = db.Magazyn.Find(wyp.IDks);
-				
 				if (wyp != null)
 				{
+					var ksi = db.Magazyn.Find(wyp.IDks);
+				
+				
 					if (wyp.DataOddania != null)
 					{
 						ksi.Dostepne++;

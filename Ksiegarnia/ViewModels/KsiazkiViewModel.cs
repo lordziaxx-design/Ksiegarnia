@@ -16,7 +16,6 @@ namespace Ksiegarnia.ViewModels
 			Booksnum = new ObservableCollection<Magazyn>();
 			Booksfull = new ObservableCollection<Ksiazkifull>();
 			LoadData();
-			CombineData();
 		}
 
 		public void LoadData()
@@ -29,6 +28,7 @@ namespace Ksiegarnia.ViewModels
 				Books.Add(book);
 			foreach (var booknum in db.Magazyn)
 				Booksnum.Add(booknum);
+			CombineData();
 		}
 		private void CombineData()
 		{
