@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,6 +13,6 @@ namespace Ksiegarnia.Models
 		public int IDczyt { get; set; }
 		public DateTime DataOD { get; set; }
 		public DateTime DataDO { get; set; }
-		public DateTime? DataOddania { get; set; } // nullable — can be empty
+		public DateTime? DataOddania { get; set; } 
 	}
 }

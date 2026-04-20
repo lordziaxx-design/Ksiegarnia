@@ -1,24 +1,11 @@
 ﻿using Ksiegarnia.Models;
 using Ksiegarnia.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Ksiegarnia.Views
 {
-    /// <summary>
-    /// Logika interakcji dla klasy WypozyczeniaView.xaml
-    /// </summary>
     public partial class WypozyczeniaView : UserControl
     {
         public WypozyczeniaView()
@@ -50,13 +37,12 @@ namespace Ksiegarnia.Views
 					ksi.Wypozyczone++;
 				}
 				
-				db.SaveChanges(); // ← zapisz najpierw żeby dostać Id
+				db.SaveChanges();
 
 				var vm = (WypozyczeniaViewModel)DataContext;
 				vm.LoadData();
 			}
 		}
-		// EDIT
 		private void btnEdit_Click(object sender, RoutedEventArgs e)
 		{
 			var rek = (WypozyczenieDisplay)((Button)sender).Tag;
@@ -90,13 +76,12 @@ namespace Ksiegarnia.Views
 				wyp.DataOddania = record.DataOddania;
 				
 
-				db.SaveChanges(); // ← jeden SaveChanges na końcu wystarczy
+				db.SaveChanges(); 
 				var vm = (WypozyczeniaViewModel)DataContext;
 				vm.LoadData();
 			}
 		}
 
-		// DELETE
 		private void btnDelete_Click(object sender, RoutedEventArgs e)
 		{
 			var record = (WypozyczenieDisplay)((Button)sender).Tag;

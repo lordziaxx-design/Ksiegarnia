@@ -27,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- TOP BAR -->
+
         <Grid Grid.Row="0" Background="#2C3E50" Height="60">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -42,14 +42,14 @@
                        HorizontalAlignment="Center"/>
         </Grid>
 
-        <!-- MAIN AREA -->
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- SIDEBAR -->
+
             <Border Background="#34495E">
                 <StackPanel Margin="5">
                     <Button Content="📚 Książki"
@@ -67,7 +67,7 @@
                 </StackPanel>
             </Border>
 
-            <!-- CONTENT -->
+
             <ContentControl Grid.Column="1"
                             Margin="10"
                             Content="{Binding CurrentView}"/>

@@ -1,7 +1,6 @@
-﻿using Ksiegarnia;
+﻿
 using System.Collections.ObjectModel;
-using System.Linq;
-using Ksiegarnia.Models;
+
 
 namespace Ksiegarnia.ViewModels
 {

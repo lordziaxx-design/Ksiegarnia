@@ -1,6 +1,4 @@
-﻿using Ksiegarnia;
-using Ksiegarnia.Models;
-using Microsoft.Data.SqlClient;
+﻿using Ksiegarnia.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
@@ -10,7 +8,6 @@ namespace Ksiegarnia
 {
 	public class AppDbContext : DbContext
 	{
-		// Each DbSet = one table
 		public DbSet<Ksiazka> Ksiazki { get; set; }
 		public DbSet<Czytelnik> Czytelnicy { get; set; }
 		public DbSet<Wypozyczenie> Wypozyczenia { get; set; }

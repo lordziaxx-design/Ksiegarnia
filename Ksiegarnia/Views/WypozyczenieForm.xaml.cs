@@ -1,13 +1,7 @@
 ﻿using Ksiegarnia.Models;
-using Microsoft.Data.SqlClient;
-using System.Text;
 using System.Windows;
-using System.Windows.Interop;
 namespace Ksiegarnia
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class WypozyczenieForm : Window
 	{
 		private Wypozyczenie _record;
@@ -18,7 +12,7 @@ namespace Ksiegarnia
 			InitializeComponent();
 			_record = record;
 			LoadComboBoxes();
-			if (_record != null) // EDIT mode — pre-fill the form
+			if (_record != null)
 			{
 
 				ksiazka.SelectedValue = record.IDks;
@@ -69,7 +63,7 @@ namespace Ksiegarnia
 		
 
 			Saved = true;
-			DialogResult = true; // closes the dialog
+			DialogResult = true; 
 		}
 
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -85,8 +79,8 @@ namespace Ksiegarnia
 			czyt.DisplayMemberPath = "ImieNazwisko";
 			czyt.SelectedValuePath = "ID";
 
-			ksiazka.ItemsSource = db.Ksiazki.ToList(); // adjust DbSet name
-			ksiazka.DisplayMemberPath = "Nazwa";       // adjust property name
+			ksiazka.ItemsSource = db.Ksiazki.ToList(); 
+			ksiazka.DisplayMemberPath = "Nazwa";      
 			ksiazka.SelectedValuePath = "ID_ksiazki";
 		}
 		public Wypozyczenie GetRecord() => _record;

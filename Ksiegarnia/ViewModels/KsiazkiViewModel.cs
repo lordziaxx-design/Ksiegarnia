@@ -1,4 +1,4 @@
-﻿using Ksiegarnia;
+﻿
 using System.Collections.ObjectModel;
 using Ksiegarnia.Models;
 
@@ -21,7 +21,9 @@ namespace Ksiegarnia.ViewModels
 
 		public void LoadData()
 		{
-
+			Books.Clear();
+			Booksnum.Clear();
+			Booksfull.Clear();
 			using var db = new AppDbContext();
 			foreach (var book in db.Ksiazki)
 				Books.Add(book);

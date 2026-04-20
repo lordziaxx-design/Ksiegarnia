@@ -1,23 +1,11 @@
 ﻿using Ksiegarnia.Models;
 using Ksiegarnia.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Ksiegarnia.Views
 {
-    /// <summary>
-    /// Logika interakcji dla klasy KlienciView.xaml
-    /// </summary>
+
     public partial class KlienciView : UserControl
     {
         public KlienciView()
@@ -42,13 +30,12 @@ namespace Ksiegarnia.Views
 					Telefon = record.Telefon
 				};
 				db.Czytelnicy.Add(czytelnik);
-				db.SaveChanges(); // ← zapisz najpierw żeby dostać Id
+				db.SaveChanges(); 
 				var vm = (KlienciViewModel)DataContext;
 				vm.LoadData();
 			}
 		}
 
-		// EDIT
 		private void btnEdit_Click(object sender, RoutedEventArgs e)
 		{
 			var rekord = (Czytelnik)((Button)sender).Tag;
@@ -64,13 +51,12 @@ namespace Ksiegarnia.Views
 				czytelnik.Email = record.Email;
 				czytelnik.Telefon = record.Telefon;
 
-				db.SaveChanges(); // ← jeden SaveChanges na końcu wystarczy
+				db.SaveChanges(); 
 				var vm = (KlienciViewModel)DataContext;
 				vm.LoadData();
 			}
 		}
 
-		// DELETE
 		private void btnDelete_Click(object sender, RoutedEventArgs e)
 		{
 			var record = (Czytelnik)((Button)sender).Tag;
@@ -83,7 +69,7 @@ namespace Ksiegarnia.Views
 				if (czytelnik != null)
 					db.Czytelnicy.Remove(czytelnik);
 				db.SaveChanges();
-				var vm = (KsiazkiViewModel)DataContext;
+				var vm = (KlienciViewModel)DataContext;
 				vm.LoadData();
 			}
 		}

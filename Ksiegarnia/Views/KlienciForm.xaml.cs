@@ -1,7 +1,5 @@
 ﻿using Ksiegarnia.Models;
-using Microsoft.Data.SqlClient;
 using System.Windows;
-using System.Windows.Interop;
 
 namespace Ksiegarnia.Views
 {
@@ -9,14 +7,12 @@ namespace Ksiegarnia.Views
 	{
 		private Czytelnik _record;
 		public bool Saved { get; private set; } = false;
-
-		// Called with null for Add, or an existing record for Edit
 		public KlienciForm(Czytelnik record = null)
 		{
 			InitializeComponent();
 			_record = record;
 
-			if (_record != null) // EDIT mode — pre-fill the form
+			if (_record != null) 
 			{
 				imie.Text = _record.Imie;
 				nazwisko.Text = _record.Nazwisko;
@@ -33,17 +29,17 @@ namespace Ksiegarnia.Views
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
 			// Basic validation
-			if (string.IsNullOrWhiteSpace(imie.Text))
+			if (string.IsNullOrWhiteSpace(imie.Text) || !imie.Text.All(char.IsLetter))
 			{
 				MessageBox.Show("Name is required."); return;
 			}
-			if (string.IsNullOrWhiteSpace(nazwisko.Text))
+			if (string.IsNullOrWhiteSpace(nazwisko.Text) || !nazwisko.Text.All(char.IsLetter))
 			{
-				MessageBox.Show("Name is required."); return;
+				MessageBox.Show("Last name is required."); return;
 			}
-			if (string.IsNullOrWhiteSpace(telefon.Text))
+			if (string.IsNullOrWhiteSpace(telefon.Text) || !telefon.Text.All(char.IsDigit))
 			{
-				MessageBox.Show("Enter a valid price."); return;
+				MessageBox.Show("Enter a valid phone number."); return;
 			}
 
 			_record.Imie = imie.Text.Trim();
@@ -52,7 +48,7 @@ namespace Ksiegarnia.Views
 			_record.Telefon = telefon.Text.Trim();
 
 			Saved = true;
-			DialogResult = true; // closes the dialog
+			DialogResult = true;
 		}
 
 		private void btnCancel_Click(object sender, RoutedEventArgs e)

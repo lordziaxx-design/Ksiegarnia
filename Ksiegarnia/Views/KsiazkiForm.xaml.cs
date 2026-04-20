@@ -1,25 +1,19 @@
 ﻿using Ksiegarnia.Models;
-using Microsoft.Data.SqlClient;
-using System.Text;
 using System.Windows;
-using System.Xml.Linq;
 namespace Ksiegarnia
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
+
 	public partial class KsiazkaForm : Window
 	{
 		private Ksiazkifull _record;
 		public bool Saved { get; private set; } = false;
 
-		// Called with null for Add, or an existing record for Edit
 		public KsiazkaForm(Ksiazkifull record = null)
 		{
 			InitializeComponent();
 			_record = record;
 
-			if (_record != null) // EDIT mode — pre-fill the form
+			if (_record != null)
 			{
 				nazwa.Text = _record.Tytul;
 				autor.Text = _record.Autor;
@@ -36,13 +30,13 @@ namespace Ksiegarnia
 		private void btnSave_Click(object sender, RoutedEventArgs e)
 		{
 			// Basic validation
-			if (string.IsNullOrWhiteSpace(nazwa.Text))
+			if (string.IsNullOrWhiteSpace(nazwa.Text) || !nazwa.Text.All(char.IsLetter)	)
 			{
 				MessageBox.Show("Name is required."); return;
 			}
-			if (string.IsNullOrWhiteSpace(autor.Text))
+			if (string.IsNullOrWhiteSpace(autor.Text) || !autor.Text.All(char.IsLetter))
 			{
-				MessageBox.Show("Name is required."); return;
+				MessageBox.Show("Author is required."); return;
 			}
 			if (!decimal.TryParse(cena.Text, out decimal price))
 			{
@@ -55,7 +49,7 @@ namespace Ksiegarnia
 			_record.Stan = int.Parse(mag.Text);
 
 			Saved = true;
-			DialogResult = true; // closes the dialog
+			DialogResult = true; 
 		}
 
 		private void btnCancel_Click(object sender, RoutedEventArgs e)
